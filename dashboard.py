@@ -179,7 +179,7 @@ def handlingmissing(df):
 
 
 def main():
-    st.set_page_config(page_title="VickyStore",page_icon=":sparkling_heart:",layout="wide")
+    st.set_page_config(page_title="Dashboard",page_icon=":sparkling_heart:",layout="wide")
 
     st.markdown('<style>div.block-container{padding-top:1rem;} </style>', unsafe_allow_html=True     )
 
@@ -192,7 +192,7 @@ def main():
     
     #Check columns
     if df.empty:
-        st.write('Uploaded Empty Dataset')
+        st.write('Upload Excel Dataset')
     else:
         date_range, service_type = Sidebar_Filters(df)
         filtered_df = Filter_Data(df, date_range, service_type)
