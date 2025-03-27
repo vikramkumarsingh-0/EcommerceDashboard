@@ -77,4 +77,4 @@ st.plotly_chart(fig_service_heatmap)
 st.session_state.filtered_data = filtered_df
     # Button to navigate to dashboard
 if st.button("Go to Dashboard"):
-    st.switch_page("pages\PricePrediction.py")
+    st.switch_page("pages/PricePrediction.py")
