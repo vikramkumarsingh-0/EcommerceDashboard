@@ -17,7 +17,7 @@ ENCODERS_FILE = "label_encoders.pkl"
 if "filtered_data" in st.session_state and not st.session_state.filtered_data.empty:
     filtered_df = st.session_state.filtered_data
 # Data Preprocessing
-st.write("### Data Preprocessing")
+st.write("Data Preprocessing")
 df = filtered_df.dropna()
 
 # Encoding categorical variables
@@ -75,7 +75,7 @@ st.write(f"**Mean Absolute Error (MAE):** {mae:.2f}")
 st.write(f"**R² Score:** {r2:.2f}")
 
 # Prediction Interface in Streamlit
-st.write("### Predict Booking Price")
+st.write("Predict Booking Price")
 
 # Load saved model & encoders
 if os.path.exists(MODEL_FILE) and os.path.exists(SCALER_FILE) and os.path.exists(ENCODERS_FILE):
@@ -102,7 +102,7 @@ for col in categorical_columns:
     if input_df[col][0] in label_encoders[col].classes_:
         input_df[col] = label_encoders[col].transform(input_df[col])
     else:
-        st.warning(f"⚠️ Unseen label '{input_df[col][0]}' in '{col}'. Using default value (-1).")
+        st.warning(f"Unseen label '{input_df[col][0]}' in '{col}'. Using default value (-1).")
         input_df[col] = -1  # Assign -1 for unknown labels
 
 # Scale input
@@ -111,4 +111,4 @@ input_df = scaler.transform(input_df)
 # Predict Price
 if st.button("Predict Price"):
     predicted_price = model.predict(input_df)
-    st.write(f"### Predicted Price: { predicted_price[0]:.2f}")
+    st.write(f"Predicted Price: { predicted_price[0]:.2f}")
