@@ -153,7 +153,7 @@ def Filtered_Data(filtered_df):
         st.session_state.filtered_data = filtered_df
         # Button to navigate to dashboard
         if st.button("Go to Dashboard"):
-            st.switch_page("pages\dashboardOfFilterData.py")
+            st.switch_page("pages/dashboardOfFilterData.py")
     
     with col2:
         st.download_button("Download Data", data=csv, file_name="Filtered_Data.csv", mime="text/csv")
