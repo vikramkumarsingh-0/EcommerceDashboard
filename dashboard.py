@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # Load Data with Caching
 @st.cache_resource
 def load_data():
-    file_path = "DataAnalyst_Assesment_Dataset.xlsx"
+    file_path = "/mount/src/ecommercedashboard/DataAnalyst_Assesment_Dataset.xlsx"
     df = pd.read_excel(file_path)
     df['Booking Date'] = pd.to_datetime(df['Booking Date'], errors='coerce')
     return df
