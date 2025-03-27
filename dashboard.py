@@ -6,14 +6,17 @@ from sklearn.preprocessing import LabelEncoder
 import matplotlib.pyplot as plt
 
 
-# Load Data with Caching
-@st.cache_resource
-def load_data():
-    file_path = "/mount/src/ecommercedashboard/DataAnalyst_Assesment_Dataset.xlsx"
-    df = pd.read_excel(file_path)
-    df['Booking Date'] = pd.to_datetime(df['Booking Date'], errors='coerce')
-    return df
+# Define file path relative to script location
+BASE_DIR = "/mount/src/ecommercedashboard"
+FILE_NAME = "data.xlsx"  # Replace with your actual Excel file name
+file_path = os.path.join(BASE_DIR, FILE_NAME)
 
+@st.cache_data
+def load_data():
+    if not os.path.exists(file_path):
+        st.error(f"File not found: {file_path}")
+        return None
+    return pd.read_excel(file_path)
 
 def Sidebar_Filters(df):
     st.sidebar.header("Filters")
@@ -165,7 +168,13 @@ def handlingmissing(df):
 
 
 def main():
+    st.title("Ecommerce Dashboard")
+    
     df = load_data()
+    if df is None:
+        st.warning("No data loaded. Check if the file exists.")
+        return
+    
     date_range, service_type = Sidebar_Filters(df)
     filtered_df = Filter_Data(df, date_range, service_type)
     
